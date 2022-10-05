@@ -13,7 +13,7 @@ use App\Entity\User;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/registration', name: 'app_registration')]
+    #[Route('/register', name: 'app_registration')]
     public function index(UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
