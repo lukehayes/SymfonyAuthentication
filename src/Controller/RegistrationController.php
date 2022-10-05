@@ -37,6 +37,10 @@ class RegistrationController extends AbstractController
         $entityManager->flush();
 
 
+        // TODO Just stops the user being added multiple times.
+        // added for testing purposes. Will remvoe later.
+        dd("Dummy User Registered");
+
         return $this->render('registration/index.html.twig', [
             'controller_name' => 'RegistrationController',
         ]);
