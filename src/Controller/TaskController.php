@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/task')]
 class TaskController extends AbstractController
@@ -22,11 +23,22 @@ class TaskController extends AbstractController
     }
 
     #[Route('/new', name: 'app_task_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TaskRepository $taskRepository): Response
+    public function new(Request $request, ValidatorInterface $validator, TaskRepository $taskRepository): Response
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
+
+        //-----------------------------------------------
+        // Form Validation.
+        //-----------------------------------------------
+        $errors = $validator->validate($task);
+
+        if(count($errors) > 0)
+        {
+            $errorString = (string) $errors;
+            return new Response($errorString);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $taskRepository->save($task, true);
@@ -37,6 +49,7 @@ class TaskController extends AbstractController
         return $this->renderForm('task/new.html.twig', [
             'task' => $task,
             'form' => $form,
+            'errors' => $errors
         ]);
     }
 

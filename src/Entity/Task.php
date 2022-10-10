@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
 {
@@ -13,6 +15,12 @@ class Task
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 5,
+        max: 50,
+        minMessage: 'Your task name must be at least {{ limit }} characters long',
+        maxMessage: 'Your task name cannot be longer than {{ limit }} characters',
+    )]
     #[ORM\Column(length: 255)]
     private ?string $task = null;
 
