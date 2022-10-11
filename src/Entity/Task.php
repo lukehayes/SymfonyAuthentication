@@ -27,6 +27,9 @@ class Task
     #[ORM\Column]
     private ?bool $completed = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    private ?User $user_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +55,18 @@ class Task
     public function setCompleted(bool $completed): self
     {
         $this->completed = $completed;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }
