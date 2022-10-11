@@ -26,6 +26,7 @@ class TaskController extends AbstractController
     public function new(Request $request, ValidatorInterface $validator, TaskRepository $taskRepository): Response
     {
         $task = new Task();
+        $task->setUserId($this->getUser());
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
