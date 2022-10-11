@@ -19,6 +19,10 @@
         {% endblock %}
     </head>
     <body>
+
+        <a href="{{path('app_login')}}">Login</a>
+        <a href="{{path('app_registration')}}">Register</a>
+
         {% block body %}{% endblock %}
     </body>
 </html>
