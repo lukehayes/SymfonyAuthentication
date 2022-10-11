@@ -18,8 +18,8 @@ class Task
     #[Assert\Length(
         min: 5,
         max: 50,
-        minMessage: 'Your task name must be at least {{ limit }} characters long',
-        maxMessage: 'Your task name cannot be longer than {{ limit }} characters',
+        minMessage: 'Task name must be at least {{ limit }} characters long',
+        maxMessage: 'Your task cannot be longer than {{ limit }} characters',
     )]
     #[ORM\Column(length: 255)]
     private ?string $task = null;
