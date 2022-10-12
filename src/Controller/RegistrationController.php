@@ -20,20 +20,30 @@ class RegistrationController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         // Create a new user here for now.
-        $user = new User();
-        $user->setEmail("example@example.com");
-        $plainTextPassword = "password";
+        $u1 = new User();
+        $u1->setEmail("example@example.com");
+        $u1password = "password";
 
-
-        $hashedPassword = $passwordHasher->hashPassword(
-            $user,
-            $plainTextPassword
+        $u1hashedpwd = $passwordHasher->hashPassword(
+            $u1,
+            $u1password
         );
 
+        $u1->setPassword($u1hashedpwd);
 
-        $user->setPassword($hashedPassword);
+        $u2 = new User();
+        $u2->setEmail("developer@developer.com");
+        $u2password = "password";
 
-        $entityManager->persist($user);
+        $u2hashedpwd = $passwordHasher->hashPassword(
+            $u2,
+            $u2password
+        );
+
+        $u2->setPassword($u2hashedpwd);
+
+        $entityManager->persist($u1);
+        $entityManager->persist($u2);
 
         $entityManager->flush();
 
