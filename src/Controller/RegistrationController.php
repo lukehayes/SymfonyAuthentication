@@ -15,7 +15,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_registration')]
-    public function index(UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
+    public function new(UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        return $this->render('registration/index.html.twig', [
+            'controller_name' => 'RegistrationController',
+        ]);
+    }
+
+    #[Route('/createusers', name: 'app_createusers')]
+    public function create(UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
 
@@ -52,9 +62,6 @@ class RegistrationController extends AbstractController
         // added for testing purposes. Will remvoe later.
         dd("Dummy User Registered");
 
-        return $this->render('registration/index.html.twig', [
-            'controller_name' => 'RegistrationController',
-        ]);
     }
 
     /**
