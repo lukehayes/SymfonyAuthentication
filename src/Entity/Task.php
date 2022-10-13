@@ -30,6 +30,9 @@ class Task
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     private ?User $user_id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    private ?Category $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +70,18 @@ class Task
     public function setUserId(?User $user_id): self
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
