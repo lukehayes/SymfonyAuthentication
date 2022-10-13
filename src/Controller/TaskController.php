@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[IsGranted('ROLE_USER')]
-#[Route('/')]
+#[Route('/tasks')]
 class TaskController extends AbstractController
 {
     #[Route('/', name: 'app_task_index', methods: ['GET'])]
@@ -29,6 +29,7 @@ class TaskController extends AbstractController
     {
         $task = new Task();
         $task->setUserId($this->getUser());
+
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
@@ -56,7 +57,7 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_task_show', methods: ['GET'])]
+    #[Route('/task/{id}', name: 'app_task_show', methods: ['GET'])]
     public function show(Task $task): Response
     {
         return $this->render('task/show.html.twig', [
@@ -64,7 +65,7 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_task_edit', methods: ['GET', 'POST'])]
+    #[Route('/task/{id}/edit', name: 'app_task_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Task $task, TaskRepository $taskRepository): Response
     {
         $form = $this->createForm(TaskType::class, $task);
