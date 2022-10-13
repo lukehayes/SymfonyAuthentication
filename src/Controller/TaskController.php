@@ -19,8 +19,10 @@ class TaskController extends AbstractController
     #[Route('/', name: 'app_task_index', methods: ['GET'])]
     public function index(TaskRepository $taskRepository): Response
     {
+        $user = $this->getUser();
+
         return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            'tasks' => $taskRepository->findBy(['user_id' => $user->getId()]),
         ]);
     }
 
