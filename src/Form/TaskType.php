@@ -6,6 +6,8 @@ use App\Entity\Task;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Category;
 
 class TaskType extends AbstractType
 {
@@ -14,6 +16,10 @@ class TaskType extends AbstractType
         $builder
             ->add('task')
             ->add('completed')
+            ->add('category', EntityType::class,[
+                'class' => Category::class,
+                'choice_label' => 'Category'
+            ])
         ;
     }
 
