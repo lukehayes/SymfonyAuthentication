@@ -10,15 +10,21 @@ class Categories extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $workCategory = new Category();
-        $workCategory->setCategory("Work");
+        $categories = [
+            "Work",
+            "Important",
+            "Reading",
+            "Fun",
+            "Done"
+        ];
 
-        $importantCategory = new Category();
-        $importantCategory->setCategory("Important");
+        array_map(function($elem) use ($manager)
+        {
+            $category = new Category();
+            $category->setCategory($elem);
+            $manager->persist($category);
 
-
-        $manager->persist($workCategory);
-        $manager->persist($importantCategory);
+        }, $categories);
 
         $manager->flush();
     }
