@@ -13,6 +13,7 @@
             <tr>
                 <th>Id</th>
                 <th>Task</th>
+                <th>Category</th>
                 <th>Completed</th>
                 <th>actions</th>
             </tr>
@@ -22,6 +23,7 @@
             <tr>
                 <td>{{ task.id }}</td>
                 <td>{{ task.task }}</td>
+                <td>{{ task.category }}</td>
                 <td>{{ task.completed ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_task_show', {'id': task.id}) }}">show</a>
