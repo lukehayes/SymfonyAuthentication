@@ -12,7 +12,7 @@ class LoginController extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
-        // Get the error is there is one.
+        // Get the error if there is one.
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // Get last username entered by the user.
